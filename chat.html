@@ -4,9 +4,20 @@
 
 <body>
   <h1>Simple Chat</h1>
+  {{> rooms}}
   {{> input}}
   {{> comments}}
 </body>
+
+<template name="rooms">
+  <h2>Rooms:</h2>
+  <ul class="rooms">
+    {{#each rooms}}
+    <li class="{{selected}}"><a href="#" data-name="{{name}}">{{display}}</a></li>
+    {{/each}}
+  </ul>
+  <hr>
+</template>
 
 <template name="input">
   <div class="input">
@@ -17,7 +28,7 @@
 </template>
 
 <template name="comments">
-  <ul>
+  <ul class="comments">
     {{#each comments}}
       {{> comment}}
     {{/each}}

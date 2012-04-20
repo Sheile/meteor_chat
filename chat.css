@@ -1,5 +1,23 @@
 /* CSS declarations go here */
-ul {
+.clearfix {
+  width:100%;
+}
+
+.clearfix:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+
+ul.rooms {
+  width: 320px;
+}
+
+ul.rooms li.selected {
+  background-color: yellow;
+}
+
+ul.comments {
   width: 640px;
   height: 320px;
   overflow-y: scroll;
@@ -7,20 +25,20 @@ ul {
   padding: 0px;
 }
 
-ul li {
+ul.comments li {
   list-style-type: none;
   margin-left: 0px;
   padding: 6px;
 }
 
-ul li:nth-child(odd) {
+ul.comments li:nth-child(odd) {
   background-color: #CCCCFF;
 }
 
-ul li span.name {
+ul.comments li span.name {
   font-weight: bold;
 }
 
-ul li span.date {
+ul.comments li span.date {
   color: gray;
 }

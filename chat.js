@@ -1,6 +1,23 @@
 Comments = new Meteor.Collection("comments");
 
 if (Meteor.is_client) {
+  function current_room() {
+    return Session.get("current_room") || Template.rooms.rooms[0].name;
+  }
+
+  Template.rooms.selected = function() {
+    return current_room() == this.name ? "selected" : ""
+  }
+
+  Template.rooms.rooms = [{name: "rooma", display: "部屋A"},
+                          {name: "roomb", display: "部屋B"}];
+
+  Template.rooms.events = {
+    'click a': function(evt) {
+      Session.set("current_room", $(evt.target).data("name"));
+    }
+  };
+
   Template.input.current_name = function() {
     return Session.get("name");
   };
@@ -18,14 +35,14 @@ if (Meteor.is_client) {
 
       Session.set("name", name);
 
-      Comments.insert({ name: name, text: text, date: new Date().toString() });
+      Comments.insert({ room: current_room(), name: name, text: text, date: new Date().toString() });
       $("input#text").val("");
       $("input#text").focus();
     }
   };
 
   Template.comments.comments = function() {
-    return Comments.find({}, {sort: {date: -1}});
+    return Comments.find({room: current_room()}, {sort: {date: -1}});
   }
 
   Template.comment.date = function() {
@@ -42,7 +59,7 @@ if (Meteor.is_server) {
       var min = new Date().getMinutes();
       if(hour != latestHour && min == 0) {
         var text = '---- サーバが' + new Date().format("HH") + '時をお知らせします。 ----'
-        Comments.insert({ name: '時報', text: text, date: new Date().toString() });
+        Comments.insert({ room: 'rooma', name: '時報', text: text, date: new Date().toString() });
 
         latestHour = hour;
       }
