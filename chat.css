@@ -1,0 +1,26 @@
+/* CSS declarations go here */
+ul {
+  width: 640px;
+  height: 320px;
+  overflow-y: scroll;
+  border: solid 1px black;
+  padding: 0px;
+}
+
+ul li {
+  list-style-type: none;
+  margin-left: 0px;
+  padding: 6px;
+}
+
+ul li:nth-child(odd) {
+  background-color: #CCCCFF;
+}
+
+ul li span.name {
+  font-weight: bold;
+}
+
+ul li span.date {
+  color: gray;
+}

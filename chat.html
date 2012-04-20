@@ -1,0 +1,29 @@
+<head>
+  <title>chat</title>
+</head>
+
+<body>
+  <h1>Simple Chat</h1>
+  {{> input}}
+  {{> comments}}
+</body>
+
+<template name="input">
+  <div class="input">
+    名前：<input type="input" id="name" /><br>
+    発言：<input type="input" id="text" />
+    <input type="button" id="submit" value="Click" />
+  </div>
+</template>
+
+<template name="comments">
+  <ul>
+    {{#each comments}}
+      {{> comment}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="comment">
+  <li><span class="name">{{name}}：</span>{{text}} <span class="date">{{date}}</span></li>
+</template>
