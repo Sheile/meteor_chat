@@ -1,8 +1,8 @@
 Comments = new Meteor.Collection("comments");
 
 if (Meteor.is_client) {
-  Template.input.greeting = function () {
-    return "Welcome to chat.";
+  Template.input.current_name = function() {
+    return Session.get("name");
   };
 
   Template.input.events = {
@@ -15,6 +15,8 @@ if (Meteor.is_client) {
       var text = $("input#text").val();
 
       if(name == "" || text == "") return;
+
+      Session.set("name", name);
 
       Comments.insert({ name: name, text: text, date: new Date().toString() });
       $("input#text").val("");
