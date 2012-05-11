@@ -58,7 +58,8 @@ if (Meteor.is_server) {
       var hour = new Date().getHours();
       var min = new Date().getMinutes();
       if(hour != latestHour && min == 0) {
-        var text = '---- サーバが' + new Date().format("HH") + '時をお知らせします。 ----'
+        hour + new Date().getTimezoneOffset / 60 + 9;
+        var text = '---- サーバが' + hour + '時をお知らせします。 ----'
         Comments.insert({ room: 'rooma', name: '時報', text: text, date: new Date().toString() });
 
         latestHour = hour;
