@@ -35,7 +35,7 @@ if (Meteor.is_client) {
 
       Session.set("name", name);
 
-      Comments.insert({ room: current_room(), name: name, text: text, date: new Date().toString() });
+      Comments.insert({ room: current_room(), name: name, text: text, date: new Date().getTime() });
       $("input#text").val("");
       $("input#text").focus();
     }
@@ -59,9 +59,9 @@ if (Meteor.is_server) {
       var hour = new Date().getHours();
       var min = new Date().getMinutes();
       if(hour != latestHour && min == 0) {
-        hour = (hour + new Date().getTimezoneOffset / 60 + 9) % 24;
-        var text = '---- サーバが' + hour + '時をお知らせします。 ----'
-        Comments.insert({ room: 'rooma', name: '時報', text: text, date: new Date().toString() });
+        var modified_hour = (hour + new Date().getTimezoneOffset() / 60 + 9) % 24;
+        var text = '---- サーバが' + modified_hour + '時をお知らせします。 ----'
+        Comments.insert({ room: 'rooma', name: '時報', text: text, date: new Date().getTime() });
 
         latestHour = hour;
       }
