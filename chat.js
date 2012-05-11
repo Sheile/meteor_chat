@@ -42,7 +42,8 @@ if (Meteor.is_client) {
   };
 
   Template.comments.comments = function() {
-    return Comments.find({room: current_room()}, {sort: {date: -1}});
+    var comments = Comments.find({room: current_room()}, {sort: {date: -1}}).fetch();
+    return comments.slice(0, 20);
   }
 
   Template.comment.date = function() {
