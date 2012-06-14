@@ -23,10 +23,10 @@ if (Meteor.is_client) {
   };
 
   Template.input.events = {
-    'click input#submit, keyup input#text' : function (evt) {
+    'click input#submit, keydown input#text' : function (evt) {
 
       //  Returnキー以外は何もしない
-      if(evt.type == "keyup" && evt.which != 13) return;
+      if(evt.type == "keydown" && evt.which != 13) return;
 
       var name = $("input#name").val();
       var text = $("input#text").val();
